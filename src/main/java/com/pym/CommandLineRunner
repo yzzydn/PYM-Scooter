@@ -1,0 +1,33 @@
+package com.pym.scooter;
+
+import com.pym.scooter.model.Scooter;
+import com.pym.scooter.model.ScooterType;
+import com.pym.scooter.model.Station;
+import com.pym.scooter.repository.ScooterRepository;
+import com.pym.scooter.repository.StationRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+
+@Configuration
+public class DataSeeder {
+
+    @Bean
+    CommandLineRunner initData(StationRepository stationRepo, ScooterRepository scooterRepo) {
+        return args -> {
+            Station s1 = new Station("Basel SBB", "Central Basel");
+            Station s2 = new Station("Badischer Bahnhof", "North Basel");
+            Station s3 = new Station("Claraplatz", "East Basel");
+            Station s4 = new Station("Bankveria", "West Basel");
+
+            stationRepo.saveAll(Arrays.asList(s1, s2, s3, s4));
+
+            Scooter sc1 = new Scooter("L001", ScooterType.LONG_DISTANCE, true, 85, s1);
+            Scooter sc2 = new Scooter("S001", ScooterType.SHORT_DISTANCE, true, 45, s2);
+
+            scooterRepo.saveAll(Arrays.asList(sc1, sc2));
+        };
+    }
+}
