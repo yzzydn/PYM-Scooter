@@ -3,7 +3,7 @@ package com.pym.scooter.controller;
 import com.pym.scooter.model.*;
 import com.pym.scooter.service.ScooterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +15,13 @@ public class ScooterController {
     @Autowired
     private ScooterService scooterService;
 
+    // GET available scooters for a station
     @GetMapping("/available")
-    public ResponseEntity<List<Scooter>> getAvailable(@RequestParam String station) {
-        return ResponseEntity.ok(scooterService.getAvailableScooters(station));
+    public List<Scooter> getAvailable(@RequestParam String station) {
+        return scooterService.getAvailableScooters(station);
     }
 
+    // POST: rent a scooter
     @PostMapping("/rent")
     public ResponseEntity<?> rentScooter(@RequestParam Long scooterId, @RequestParam String userName) {
         try {
@@ -30,6 +32,7 @@ public class ScooterController {
         }
     }
 
+    // POST: return a scooter
     @PostMapping("/return")
     public ResponseEntity<?> returnScooter(@RequestParam Long rentalId) {
         try {
@@ -40,9 +43,9 @@ public class ScooterController {
         }
     }
 
+    // GET all stations (for dropdowns etc.)
     @GetMapping("/stations")
-    public ResponseEntity<List<Station>> getStations() {
-        return ResponseEntity.ok(scooterService.getAllStations());
+    public List<Station> getStations() {
+        return scooterService.getAllStations();
     }
 }
-
