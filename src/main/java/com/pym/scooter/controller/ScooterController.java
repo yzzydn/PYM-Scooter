@@ -45,3 +45,4 @@ public class ScooterController {
         return ResponseEntity.ok(scooterService.getAllStations());
     }
 }
+
