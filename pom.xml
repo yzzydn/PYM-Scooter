@@ -4,64 +4,71 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- ✅ Spring Boot Parent -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <groupId>com.pym</groupId>
-    <artifactId>pym-scooter</artifactId>
+    <artifactId>scooter</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>PYM-Scooter</name>
-    <description>Electric scooter rental service</description>
+    <description>Spring Boot Scooter Rental System</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version> <!-- Update if needed -->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>17</java.version> <!-- Update to 17 or 21 based on your Java -->
     </properties>
 
     <dependencies>
-        <!-- Web -->
+        <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JPA -->
+        <!-- Spring Boot Starter Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- PostgreSQL DB -->
+        <!-- Spring Boot Starter Security -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- H2 for in-memory dev -->
+        <!-- H2 Database (in-memory for testing) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Spring Security -->
+        <!-- Jakarta Persistence API -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
-        <!-- Testing -->
+        <!-- Jackson for JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Testing (Optional) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -72,4 +79,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
