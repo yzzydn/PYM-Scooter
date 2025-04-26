@@ -15,16 +15,12 @@ public class ScooterApplication {
     }
 
     @Bean
-    public CommandLineRunner loadData(StationRepository stationRepository) {
-        return (args) -> {
-            // Delete all existing stations (optional but ensures clean slate)
-            stationRepository.deleteAll();
-
-            // Insert all 4 required stations
-            stationRepository.save(new Station("Basel SBB", "Central Basel"));
-            stationRepository.save(new Station("Basel Badischer Bahnhof", "North Basel"));
-            stationRepository.save(new Station("Basel Claraplatz", "East Basel"));
-            stationRepository.save(new Station("Basel Bankveria", "Banking district"));
+    public CommandLineRunner dataLoader(StationRepository stationRepository) {
+        return args -> {
+            stationRepository.save(new Station(1L, "Central Park Station", 40.785091, -73.968285));
+            stationRepository.save(new Station(2L, "Downtown Station", 40.712776, -74.005974));
+            stationRepository.save(new Station(3L, "Uptown Station", 40.787011, -73.975368));
+            stationRepository.save(new Station(4L, "Harbor Station", 40.700292, -74.012425));
         };
     }
 }

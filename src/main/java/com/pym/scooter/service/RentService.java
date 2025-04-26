@@ -1,23 +1,15 @@
 package com.pym.scooter.service;
 
-import com.pym.scooter.model.Scooter;
 import com.pym.scooter.model.Rental;
-import com.pym.scooter.model.Station;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ScooterService {
+public class RentService {
 
-    private final List<Scooter> scooters = new ArrayList<>();
     private final List<Rental> rentals = new ArrayList<>();
-    private final List<Station> stations = new ArrayList<>();
-
-    public List<Scooter> getAllScooters() {
-        return scooters;
-    }
 
     public Rental rentScooter(Long scooterId, String username) {
         Rental rental = new Rental();
@@ -28,17 +20,13 @@ public class ScooterService {
         return rental;
     }
 
-    public Rental returnScooter(Long scooterId, String username) {
+    public Rental returnScooter(Long scooterId) {
         for (Rental rental : rentals) {
-            if (rental.getScooterId().equals(scooterId) && rental.isActive() && rental.getUserName().equals(username)) {
+            if (rental.getScooterId().equals(scooterId) && rental.isActive()) {
                 rental.setActive(false);
                 return rental;
             }
         }
         return null;
-    }
-
-    public List<Station> getStations() {
-        return stations;
     }
 }

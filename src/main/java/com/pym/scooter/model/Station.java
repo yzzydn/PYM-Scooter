@@ -1,30 +1,35 @@
 package com.pym.scooter.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 @Entity
+@Table(name = "station")
 public class Station {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
-    private String location;
 
-    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
-    @JsonIgnore // prevent infinite recursion when serializing
-    private List<Scooter> scooters;
+    @Column(nullable = false)
+    private Double latitude;
+
+    @Column(nullable = false)
+    private Double longitude;
 
     // Constructors
-    public Station() {}
+    public Station() {
+    }
 
-    public Station(String name, String location) {
+    public Station(Long id, String name, Double latitude, Double longitude) {
+        this.id = id;
         this.name = name;
-        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     // Getters and Setters
@@ -33,7 +38,7 @@ public class Station {
     }
 
     public void setId(Long id) {
-        this.id = id; // helpful when creating new instances
+        this.id = id;
     }
 
     public String getName() {
@@ -44,29 +49,19 @@ public class Station {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public List<Scooter> getScooters() {
-        return scooters;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setScooters(List<Scooter> scooters) {
-        this.scooters = scooters;
-    }
-
-    // Optional: toString (good for debugging)
-    @Override
-    public String toString() {
-        return "Station{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                '}';
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

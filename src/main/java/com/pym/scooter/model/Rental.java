@@ -1,7 +1,9 @@
 package com.pym.scooter.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Rental {
@@ -10,26 +12,45 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long scooterId;
     private String userName;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private boolean active;
 
-    @OneToOne
-    private Scooter scooter;
+    public Rental() {}
+
+    public Rental(Long scooterId, String userName, boolean active) {
+        this.scooterId = scooterId;
+        this.userName = userName;
+        this.active = active;
+    }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
+    public Long getId() {
+        return id;
+    }
 
-    public LocalDateTime getStartTime() { return startTime; }
-    public void setStartTime(LocalDateTime startTime) { this.startTime = startTime; }
+    public Long getScooterId() {
+        return scooterId;
+    }
 
-    public LocalDateTime getEndTime() { return endTime; }
-    public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }
+    public void setScooterId(Long scooterId) {
+        this.scooterId = scooterId;
+    }
 
-    public Scooter getScooter() { return scooter; }
-    public void setScooter(Scooter scooter) { this.scooter = scooter; }
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
