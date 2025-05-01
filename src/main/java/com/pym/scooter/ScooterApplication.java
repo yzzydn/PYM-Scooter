@@ -5,6 +5,7 @@ import com.pym.scooter.model.ScooterType;
 import com.pym.scooter.model.Station;
 import com.pym.scooter.repository.ScooterRepository;
 import com.pym.scooter.repository.StationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,7 @@ public class ScooterApplication {
     }
 
     @Bean
+    @Transactional
     public CommandLineRunner dataLoader(StationRepository stationRepo, ScooterRepository scooterRepo) {
         return args -> {
             System.out.println("🚀 Running data loader...");
