@@ -35,4 +35,11 @@ public class ScooterController {
     public List<Station> getStations() {
         return scooterService.getStations();
     }
+
+    // ✅ NEW: debug endpoint
+    @GetMapping("/debug")
+    public String debugScooterCount() {
+        int count = scooterService.getAllScooters().size();
+        return "🚨 Total scooters in DB: " + count;
+    }
 }
