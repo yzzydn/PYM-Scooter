@@ -1,6 +1,9 @@
 package com.pym.scooter;
 
+import com.pym.scooter.model.Scooter;
+import com.pym.scooter.model.ScooterType;
 import com.pym.scooter.model.Station;
+import com.pym.scooter.repository.ScooterRepository;
 import com.pym.scooter.repository.StationRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,12 +18,22 @@ public class ScooterApplication {
     }
 
     @Bean
-    public CommandLineRunner dataLoader(StationRepository stationRepository) {
-        return args -> {
-            stationRepository.save(new Station(1L, "Central Park Station", 40.785091, -73.968285));
-            stationRepository.save(new Station(2L, "Downtown Station", 40.712776, -74.005974));
-            stationRepository.save(new Station(3L, "Uptown Station", 40.787011, -73.975368));
-            stationRepository.save(new Station(4L, "Harbor Station", 40.700292, -74.012425));
-        };
-    }
+public CommandLineRunner dataLoader(StationRepository stationRepository, ScooterRepository scooterRepository) {
+    return args -> {
+        Station sbb = new Station(1L, "Basel SBB", 47.547, 7.589);
+        Station badischer = new Station(2L, "Basel Badischer Bahnhof", 47.576, 7.609);
+        Station bankveria = new Station(3L, "Basel Bankveria", 47.561, 7.597);
+        Station claraplatz = new Station(4L, "Basel Claraplatz", 47.562, 7.600);
+
+        stationRepository.save(sbb);
+        stationRepository.save(badischer);
+        stationRepository.save(bankveria);
+        stationRepository.save(claraplatz);
+
+        scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, sbb));
+        scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, badischer));
+        scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, claraplatz));
+    };
+}
+
 }
