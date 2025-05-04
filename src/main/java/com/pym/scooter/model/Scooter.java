@@ -17,23 +17,14 @@ public class Scooter {
     @JoinColumn(name = "station_id")
     private Station station;
 
-    // Default constructor
+    // Constructors
     public Scooter() {
     }
 
-    // Full-argument constructor
     public Scooter(String model, String type, boolean available, Station station) {
         this.model = model;
         this.type = type;
         this.available = available;
-        this.station = station;
-    }
-
-    // New constructor for ScooterType
-    public Scooter(ScooterType scooterType, Station station) {
-        this.model = scooterType.name();
-        this.type = scooterType.toString();
-        this.available = true;
         this.station = station;
     }
 

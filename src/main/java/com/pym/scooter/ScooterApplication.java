@@ -1,17 +1,13 @@
 package com.pym.scooter;
 
 import com.pym.scooter.model.Scooter;
-import com.pym.scooter.model.ScooterType;
 import com.pym.scooter.model.Station;
 import com.pym.scooter.repository.ScooterRepository;
 import com.pym.scooter.repository.StationRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 @SpringBootApplication
 public class ScooterApplication {
@@ -21,27 +17,21 @@ public class ScooterApplication {
     }
 
     @Bean
-    @Transactional
-    public CommandLineRunner dataLoader(StationRepository stationRepo, ScooterRepository scooterRepo) {
-        return args -> {
-            System.out.println("🚀 Running data loader...");
+    public CommandLineRunner loadData(StationRepository stationRepository, ScooterRepository scooterRepository) {
+        return (args) -> {
+            System.out.println("🚀 Loading test data...");
 
-            Station s1 = new Station(1L, "Basel SBB", 47.547, 7.589);
-            Station s2 = new Station(2L, "Basel Badischer Bahnhof", 47.576, 7.609);
-            Station s3 = new Station(3L, "Basel Bankveria", 47.561, 7.597);
-            Station s4 = new Station(4L, "Basel Claraplatz", 47.562, 7.600);
+            Station station1 = new Station(null, "Central Station", 40.7128, -74.0060);
+            Station station2 = new Station(null, "West Side Station", 40.7306, -73.9352);
 
-            stationRepo.saveAll(List.of(s1, s2, s3, s4));
+            stationRepository.save(station1);
+            stationRepository.save(station2);
 
-            List<Station> stations = List.of(s1, s2, s3, s4);
-            for (Station station : stations) {
-                for (int i = 0; i < 5; i++) {
-                    scooterRepo.save(new Scooter(ScooterType.LONG_DISTANCE, station));
-                    scooterRepo.save(new Scooter(ScooterType.SHORT_DISTANCE, station));
-                }
-            }
+            Scooter scooter1 = new Scooter("ModelX", "LONG_DISTANCE", true, station1);
+            Scooter scooter2 = new Scooter("ModelS", "SHORT_DISTANCE", true, station2);
 
-            System.out.println("✅ Finished loading 40 scooters.");
+            scooterRepository.save(scooter1);
+            scooterRepository.save(scooter2);
         };
     }
 }
