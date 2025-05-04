@@ -1,44 +1,19 @@
 package com.pym.scooter.service;
 
 import com.pym.scooter.model.Scooter;
-import com.pym.scooter.model.Rental;
-import com.pym.scooter.model.Station;
+import com.pym.scooter.repository.ScooterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ScooterService {
 
-    private final List<Scooter> scooters = new ArrayList<>();
-    private final List<Rental> rentals = new ArrayList<>();
-    private final List<Station> stations = new ArrayList<>();
+    @Autowired
+    private ScooterRepository scooterRepository;
 
     public List<Scooter> getAllScooters() {
-        return scooters;
-    }
-
-    public Rental rentScooter(Long scooterId, String username) {
-        Rental rental = new Rental();
-        rental.setScooterId(scooterId);
-        rental.setUserName(username);
-        rental.setActive(true);
-        rentals.add(rental);
-        return rental;
-    }
-
-    public Rental returnScooter(Long scooterId, String username) {
-        for (Rental rental : rentals) {
-            if (rental.getScooterId().equals(scooterId) && rental.isActive() && rental.getUserName().equals(username)) {
-                rental.setActive(false);
-                return rental;
-            }
-        }
-        return null;
-    }
-
-    public List<Station> getStations() {
-        return stations;
+        return scooterRepository.findAll();
     }
 }

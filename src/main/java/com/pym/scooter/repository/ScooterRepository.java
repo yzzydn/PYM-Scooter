@@ -4,5 +4,4 @@ import com.pym.scooter.model.Scooter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScooterRepository extends JpaRepository<Scooter, Long> {
-    // Removed availability filtering
 }

@@ -25,6 +25,11 @@ public class Station {
     public Station() {
     }
 
+    public Station(String name) {
+        this.name = name;
+    }
+    
+
     public Station(Long id, String name, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
