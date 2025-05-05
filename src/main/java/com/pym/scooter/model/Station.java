@@ -7,7 +7,7 @@ import java.util.List;
 public class Station {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Ensure IDs are auto-generated
     private Long id;
 
     private String name;
