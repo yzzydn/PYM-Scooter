@@ -1,7 +1,6 @@
 package com.pym.scooter.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 public class Station {
@@ -11,20 +10,21 @@ public class Station {
     private Long id;
 
     private String name;
-    private Double latitude;
-    private Double longitude;
 
-    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
-    private List<Scooter> scooters;
+    @Column(nullable = true)
+    private Double latitude;
+
+    @Column(nullable = true)
+    private Double longitude;
 
     public Station() {
     }
 
-    public Station(String name, Double latitude, Double longitude) {
+    public Station(String name) {
         this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
+
+    // Getters and setters (or use Lombok @Data if preferred)
 
     public Long getId() {
         return id;
@@ -52,13 +52,5 @@ public class Station {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public List<Scooter> getScooters() {
-        return scooters;
-    }
-
-    public void setScooters(List<Scooter> scooters) {
-        this.scooters = scooters;
     }
 }

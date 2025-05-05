@@ -11,42 +11,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
 
-    private final ScooterRepository scooterRepository;
     private final StationRepository stationRepository;
+    private final ScooterRepository scooterRepository;
 
-    public DatabaseInitializer(ScooterRepository scooterRepository, StationRepository stationRepository) {
-        this.scooterRepository = scooterRepository;
+    public DatabaseInitializer(StationRepository stationRepository, ScooterRepository scooterRepository) {
         this.stationRepository = stationRepository;
+        this.scooterRepository = scooterRepository;
     }
 
     @Override
     public void run(String... args) {
         System.out.println("🚀 Loading test data...");
 
-        Station claraplatz = new Station("Claraplatz", null, null);
-        Station bankveria = new Station("Bankveria", null, null);
-        Station sbb = new Station("Sbb", null, null);
-        Station badishen = new Station("Badishen Bahnhof", null, null);
+        Station s1 = new Station("Claraplatz");
+        Station s2 = new Station("Bankveria");
+        Station s3 = new Station("SBB");
+        Station s4 = new Station("Badischen Bahnhof");
 
-        stationRepository.save(claraplatz);
-        stationRepository.save(bankveria);
-        stationRepository.save(sbb);
-        stationRepository.save(badishen);
+        stationRepository.save(s1);
+        stationRepository.save(s2);
+        stationRepository.save(s3);
+        stationRepository.save(s4);
 
-        for (int i = 1; i <= 5; i++) {
-            scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, true, claraplatz));
-            scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, claraplatz));
+        Scooter sc1 = new Scooter(ScooterType.LONG_DISTANCE, true, s1);
+        Scooter sc2 = new Scooter(ScooterType.SHORT_DISTANCE, true, s2);
 
-            scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, true, bankveria));
-            scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, bankveria));
-
-            scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, true, sbb));
-            scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, sbb));
-
-            scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, true, badishen));
-            scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, badishen));
-        }
-
-        System.out.println("✅ Loaded 40 scooters across 4 pickup/dropoff stations.");
+        scooterRepository.save(sc1);
+        scooterRepository.save(sc2);
     }
 }
