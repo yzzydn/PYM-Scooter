@@ -8,6 +8,8 @@ import com.pym.scooter.repository.ScooterRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
 
@@ -23,18 +25,13 @@ public class DatabaseInitializer implements CommandLineRunner {
     public void run(String... args) {
         System.out.println("🚀 Loading test data...");
 
-        // Create stations
         Station s1 = new Station("Claraplatz");
         Station s2 = new Station("Bankveria");
         Station s3 = new Station("Sbb");
         Station s4 = new Station("Badishen Bahnhof");
 
-        stationRepository.save(s1);
-        stationRepository.save(s2);
-        stationRepository.save(s3);
-        stationRepository.save(s4);
+        stationRepository.saveAll(List.of(s1, s2, s3, s4));
 
-        // Create scooters
         scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, s1));
         scooterRepository.save(new Scooter(ScooterType.SHORT_DISTANCE, true, s2));
         scooterRepository.save(new Scooter(ScooterType.LONG_DISTANCE, true, s3));
