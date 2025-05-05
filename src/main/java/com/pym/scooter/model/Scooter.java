@@ -9,43 +9,32 @@ public class Scooter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private ScooterType type;
+
     private boolean available;
 
     @ManyToOne
-    @JoinColumn(name = "station_id")
     private Station station;
 
-    // Constructors
     public Scooter() {
     }
 
-    public Scooter(String model, String type, boolean available, Station station) {
-        this.model = model;
+    public Scooter(ScooterType type, boolean available, Station station) {
         this.type = type;
         this.available = available;
         this.station = station;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getType() {
+    public ScooterType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ScooterType type) {
         this.type = type;
     }
 

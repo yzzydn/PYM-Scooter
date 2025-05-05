@@ -1,53 +1,33 @@
 package com.pym.scooter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "station")
 public class Station {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private Double latitude;
-
-    @Column(nullable = false)
     private Double longitude;
 
-    // Constructors
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
+    private List<Scooter> scooters;
+
     public Station() {
     }
 
-    public Station(String name) {
-        this.name = name;
-    }
-    
-
-    public Station(Long id, String name, Double latitude, Double longitude) {
-        this.id = id;
+    public Station(String name, Double latitude, Double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -72,5 +52,13 @@ public class Station {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public List<Scooter> getScooters() {
+        return scooters;
+    }
+
+    public void setScooters(List<Scooter> scooters) {
+        this.scooters = scooters;
     }
 }
