@@ -15,12 +15,18 @@ public class Scooter {
     @ManyToOne
     private Station station;
 
+    private boolean available; // ✅ Add this field
+
     public Scooter() {}
 
     public Long getId() { return id; }
+
     public ScooterType getType() { return type; }
     public void setType(ScooterType type) { this.type = type; }
 
     public Station getStation() { return station; }
     public void setStation(Station station) { this.station = station; }
+
+    public boolean isAvailable() { return available; } // ✅ Getter
+    public void setAvailable(boolean available) { this.available = available; } // ✅ Setter
 }
