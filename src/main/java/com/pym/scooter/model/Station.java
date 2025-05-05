@@ -12,7 +12,7 @@ public class Station {
 
     private String name;
 
-    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
     private List<Scooter> scooters;
 
     public Station() {}
@@ -21,23 +21,10 @@ public class Station {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Scooter> getScooters() {
-        return scooters;
-    }
-
-    public void setScooters(List<Scooter> scooters) {
-        this.scooters = scooters;
-    }
+    public List<Scooter> getScooters() { return scooters; }
+    public void setScooters(List<Scooter> scooters) { this.scooters = scooters; }
 }
