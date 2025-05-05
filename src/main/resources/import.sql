@@ -1,8 +1,8 @@
 -- Stations
-INSERT INTO station (id, name, latitude, longitude) VALUES (1, 'Basel SBB', 47.547, 7.589);
-INSERT INTO station (id, name, latitude, longitude) VALUES (2, 'Basel Badischer Bahnhof', 47.576, 7.609);
-INSERT INTO station (id, name, latitude, longitude) VALUES (3, 'Basel Bankveria', 47.561, 7.597);
-INSERT INTO station (id, name, latitude, longitude) VALUES (4, 'Basel Claraplatz', 47.562, 7.600);
+INSERT INTO station (id, name) VALUES (1, 'Basel SBB') ;
+INSERT INTO station (id, name) VALUES (2, 'Basel Badischer Bahnhof');
+INSERT INTO station (id, name) VALUES (3, 'Basel Bankveria');
+INSERT INTO station (id, name) VALUES (4, 'Basel Claraplatz');
 
 -- Scooters (5 LONG + 5 SHORT per station)
 -- Basel SBB
@@ -53,3 +53,6 @@ INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, T
 INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
 INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
 INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
+
+
+
