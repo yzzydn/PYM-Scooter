@@ -1,9 +1,7 @@
 package com.pym.scooter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Rental {
@@ -12,30 +10,33 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long scooterId;
     private String userName;
+
     private boolean active;
 
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "scooter_id", nullable = false)
+    private Scooter scooter;
+
+    // Constructors
     public Rental() {}
 
-    public Rental(Long scooterId, String userName, boolean active) {
-        this.scooterId = scooterId;
+    public Rental(String userName, boolean active, LocalDateTime startTime, LocalDateTime endTime, Scooter scooter) {
         this.userName = userName;
         this.active = active;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.scooter = scooter;
     }
 
     // Getters and Setters
 
     public Long getId() {
         return id;
-    }
-
-    public Long getScooterId() {
-        return scooterId;
-    }
-
-    public void setScooterId(Long scooterId) {
-        this.scooterId = scooterId;
     }
 
     public String getUserName() {
@@ -52,5 +53,29 @@ public class Rental {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Scooter getScooter() {
+        return scooter;
+    }
+
+    public void setScooter(Scooter scooter) {
+        this.scooter = scooter;
     }
 }

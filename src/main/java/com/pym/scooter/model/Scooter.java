@@ -2,6 +2,9 @@ package com.pym.scooter.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Scooter {
 
@@ -15,10 +18,14 @@ public class Scooter {
     private boolean available;
 
     @ManyToOne
+    @JoinColumn(name = "station_id")
     private Station station;
 
-    public Scooter() {
-    }
+    @OneToMany(mappedBy = "scooter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rental> rentals = new ArrayList<>();
+
+    // Constructors
+    public Scooter() {}
 
     public Scooter(ScooterType type, boolean available, Station station) {
         this.type = type;
@@ -26,6 +33,7 @@ public class Scooter {
         this.station = station;
     }
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -52,5 +60,23 @@ public class Scooter {
 
     public void setStation(Station station) {
         this.station = station;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public void addRental(Rental rental) {
+        rentals.add(rental);
+        rental.setScooter(this);
+    }
+
+    public void removeRental(Rental rental) {
+        rentals.remove(rental);
+        rental.setScooter(null);
     }
 }
