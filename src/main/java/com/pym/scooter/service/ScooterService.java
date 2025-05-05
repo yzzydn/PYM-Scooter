@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ScooterService {
@@ -14,6 +16,11 @@ public class ScooterService {
     private ScooterRepository scooterRepository;
 
     public List<Scooter> getAllScooters() {
-        return scooterRepository.findAll();
+        return StreamSupport.stream(scooterRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+    public Scooter createScooter(Scooter scooter) {
+        return scooterRepository.save(scooter);
     }
 }

@@ -1,7 +1,9 @@
 package com.pym.scooter.repository;
 
 import com.pym.scooter.model.Scooter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ScooterRepository extends JpaRepository<Scooter, Long> {
+@Repository
+public interface ScooterRepository extends CrudRepository<Scooter, Long> {
 }
