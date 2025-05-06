@@ -1,23 +1,18 @@
 package com.pym.scooter.controller;
 
-import com.pym.scooter.model.Station;
-import com.pym.scooter.repository.StationRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/stations")
 public class StationController {
 
-    private final StationRepository stationRepository;
-
-    public StationController(StationRepository stationRepository) {
-        this.stationRepository = stationRepository;
-    }
-
-    @GetMapping("/stations")
-    public List<Station> getAllStations() {
-        return stationRepository.findAll();
+    @GetMapping
+    public List<String> getStations() {
+        System.out.println("Stations endpoint called");
+        return List.of("Station A", "Station B", "Station C");
     }
 }
