@@ -1,6 +1,6 @@
 package com.pym.scooter.model;
 
 public enum ScooterType {
-    SHORT_DISTANCE,
-    LONG_DISTANCE
+    LONG_DISTANCE,
+    SHORT_DISTANCE
 }

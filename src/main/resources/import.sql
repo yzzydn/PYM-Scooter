@@ -1,58 +1,52 @@
--- Stations
-INSERT INTO station (id, name) VALUES (1, 'Basel SBB') ;
-INSERT INTO station (id, name) VALUES (2, 'Basel Badischer Bahnhof');
-INSERT INTO station (id, name) VALUES (3, 'Basel Bankveria');
-INSERT INTO station (id, name) VALUES (4, 'Basel Claraplatz');
+-- Insert stations
+INSERT INTO station (name) VALUES ('Basel SBB');
+INSERT INTO station (name) VALUES ('Basel Badischer Bahnhof');
+INSERT INTO station (name) VALUES ('Basel Bankveria');
+INSERT INTO station (name) VALUES ('Basel Claraplatz');
 
--- Scooters (5 LONG + 5 SHORT per station)
--- Basel SBB
+-- Insert scooters for Basel SBB
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 1);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 1);
 
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 1, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 1, TRUE);
-
--- Basel Badischer Bahnhof
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 2, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 2, TRUE);
-
--- Basel Bankveria
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 3, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 3, TRUE);
-
--- Basel Claraplatz
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('LONG_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
-INSERT INTO scooter (type, station_id, available) VALUES ('SHORT_DISTANCE', 4, TRUE);
+-- Repeat for other stations
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 2);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 2);
 
 
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 3);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 3);
 
+
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Long distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 4);
+INSERT INTO scooter (type, station_id) VALUES ('Short distance', 4);

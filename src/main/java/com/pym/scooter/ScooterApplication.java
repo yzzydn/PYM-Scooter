@@ -5,55 +5,38 @@ import com.pym.scooter.model.ScooterType;
 import com.pym.scooter.model.Station;
 import com.pym.scooter.repository.ScooterRepository;
 import com.pym.scooter.repository.StationRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@RestController
 public class ScooterApplication {
-
-    @Autowired
-    private StationRepository stationRepository;
-
-    @Autowired
-    private ScooterRepository scooterRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(ScooterApplication.class, args);
     }
 
-    @PostConstruct
-    public void initData() {
-        createStationWithScooters("Basel SBB");
-        createStationWithScooters("Basel Badischer Bahnhof");
-        createStationWithScooters("Basel Bankveria");
-        createStationWithScooters("Basel Claraplatz");
-    }
+    CommandLineRunner initData(StationRepository stationRepository, ScooterRepository scooterRepository) {
+        return args -> {
+            List<Station> stations = List.of(
+                new Station("Basel SBB"),
+                new Station("Basel Badischer Bahnhof"),
+                new Station("Basel Bankveria"),
+                new Station("Basel Claraplatz")
+            );
 
-    private void createStationWithScooters(String name) {
-        Station station = new Station(name);
-        stationRepository.save(station);
-
-        List<Scooter> scooters = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Scooter shortScooter = new Scooter();
-            shortScooter.setType(ScooterType.SHORT_DISTANCE);
-            shortScooter.setStation(station);
-            scooters.add(shortScooter);
-
-            Scooter longScooter = new Scooter();
-            longScooter.setType(ScooterType.LONG_DISTANCE);
-            longScooter.setStation(station);
-            scooters.add(longScooter);
-        }
-
-        scooterRepository.saveAll(scooters);
+            for (Station station : stations) {
+                List<Scooter> scooters = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    scooters.add(new Scooter(ScooterType.LONG_DISTANCE, station));
+                    scooters.add(new Scooter(ScooterType.SHORT_DISTANCE, station));
+                }
+                station.setScooters(scooters);
+                stationRepository.save(station);
+            }
+        };
     }
 }
