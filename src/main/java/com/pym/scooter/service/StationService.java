@@ -2,6 +2,8 @@ package com.pym.scooter.service;
 
 import com.pym.scooter.model.Station;
 import com.pym.scooter.repository.StationRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +11,13 @@ import java.util.List;
 @Service
 public class StationService {
 
-    private final StationRepository stationRepository;
+     @Autowired
+    private StationRepository stationRepository;
+    
+    public Station getStationById(Long id) {
+        return stationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Station not found"));
+    }
 
     public StationService(StationRepository stationRepository) {
         this.stationRepository = stationRepository;

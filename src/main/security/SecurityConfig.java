@@ -61,4 +61,17 @@ public class SecurityConfig {
 
         return http.build();
     }
+// Add this bean to your existing SecurityConfig class
+@Bean
+public UserDetailsService userDetailsService(UserRepository userRepository) {
+    return username -> {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                user.getAuthorities());
+    };
+}
+
 }

@@ -5,9 +5,12 @@ import com.pym.scooter.model.ScooterType;
 import com.pym.scooter.model.Station;
 import com.pym.scooter.repository.ScooterRepository;
 import com.pym.scooter.repository.StationRepository;
+import com.pym.scooter.service.UserService;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,4 +42,17 @@ public class ScooterApplication {
             }
         };
     }
+    @Bean
+CommandLineRunner initUsers(UserService userService) {
+    return args -> {
+        try {
+            userService.createUser("admin", "adminpassword", "ADMIN");
+            userService.createUser("user1", "password1", "USER");
+            userService.createUser("user2", "password2", "USER");
+        } catch (Exception e) {
+            System.out.println("Users already initialized");
+        }
+    };
+}
+
 }

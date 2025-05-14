@@ -1,20 +1,30 @@
 package com.pym.scooter.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pym.scooter.model.User;
+import com.pym.scooter.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/users")
 public class UserController {
 
-    @GetMapping("/user")
-    public String userAccess() {
-        return "Welcome, User!";
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam(defaultValue = "USER") String role) {
+        
+        User user = userService.createUser(username, password, role);
+        return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/admin")
-    public String adminAccess() {
-        return "Welcome, Admin!";
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username) {
+        return ResponseEntity.ok(userService.findByUsername(username));
     }
 }
