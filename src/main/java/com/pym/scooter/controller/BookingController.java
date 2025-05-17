@@ -20,24 +20,26 @@ public class BookingController {
     private StationService stationService;
 
     @PostMapping
-    public ResponseEntity<Booking> bookScooter(
-            @RequestParam Long pickupStationId,
-            @RequestParam Long dropoffStationId,
-            @RequestParam ScooterType scooterType,
-            Authentication authentication) {
-        
-        Station pickupStation = stationService.getStationById(pickupStationId);
-        Station dropoffStation = stationService.getStationById(dropoffStationId);
-        
-        Booking booking = bookingService.createBooking(
-            pickupStation, 
-            dropoffStation, 
-            scooterType, 
-            authentication.getName()
-        );
-        
-        return ResponseEntity.ok(booking);
-    }
+public ResponseEntity<Booking> bookScooter(
+        @RequestParam Long pickupStationId,
+        @RequestParam Long dropoffStationId,
+        @RequestParam ScooterType scooterType) {
+
+    Station pickupStation = stationService.getStationById(pickupStationId);
+    Station dropoffStation = stationService.getStationById(dropoffStationId);
+
+    String username = "john_doe"; // 👈 hardcoded for dev
+
+    Booking booking = bookingService.createBooking(
+        pickupStation, 
+        dropoffStation, 
+        scooterType, 
+        username
+    );
+
+    return ResponseEntity.ok(booking);
+}
+
 
     @GetMapping("/my-bookings")
     public ResponseEntity<List<Booking>> getMyBookings(Authentication authentication) {

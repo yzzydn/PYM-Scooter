@@ -1,18 +1,22 @@
 package com.pym.scooter.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pym.scooter.model.Station;
+import com.pym.scooter.service.StationService;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
-@RequestMapping("/stations")
+@RequestMapping("/api/stations")
 public class StationController {
 
-    @GetMapping
-    public List<String> getStations() {
-        System.out.println("Stations endpoint called");
-        return List.of("Station A", "Station B", "Station C");
+    @Autowired
+    private StationService stationService;
+
+    @PostMapping
+    public ResponseEntity<Station> createStation(@RequestBody Station station) {
+        return ResponseEntity.ok(stationService.createStation(station));
     }
 }

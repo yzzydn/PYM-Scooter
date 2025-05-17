@@ -14,14 +14,16 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam(defaultValue = "USER") String role) {
-        
-        User user = userService.createUser(username, password, role);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        user.setRole("USER"); // assign default role
+        return ResponseEntity.ok(userService.createUser(
+            user.getUsername(),
+            user.getPassword(),
+            user.getRole()
+        ));
     }
+
+
 
     @GetMapping("/{username}")
     public ResponseEntity<User> getUser(@PathVariable String username) {
