@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -13,9 +15,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Register a new user
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
-        user.setRole("USER"); // assign default role
+        user.setRole("USER"); // Default role
         return ResponseEntity.ok(userService.createUser(
             user.getUsername(),
             user.getPassword(),
@@ -23,10 +26,15 @@ public class UserController {
         ));
     }
 
-
-
+    // Get a user by username
     @GetMapping("/{username}")
     public ResponseEntity<User> getUser(@PathVariable String username) {
         return ResponseEntity.ok(userService.findByUsername(username));
+    }
+
+    // Get all users
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 }

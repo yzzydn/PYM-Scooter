@@ -2,6 +2,8 @@ package com.pym.scooter.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class Station {
@@ -13,6 +15,7 @@ public class Station {
     private String name;
 
     @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
+    @JsonManagedReference 
     private List<Scooter> scooters;
 
     public Station() {}

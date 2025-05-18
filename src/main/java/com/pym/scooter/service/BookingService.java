@@ -1,12 +1,11 @@
 package com.pym.scooter.service;
 
-import com.pym.scooter.model.Booking;
-import com.pym.scooter.model.Station;
-import com.pym.scooter.model.ScooterType;
-import com.pym.scooter.repository.BookingRepository;
+import com.pym.scooter.model.*;
+import com.pym.scooter.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,16 +14,42 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public Booking createBooking(Station pickupStation, Station dropoffStation, ScooterType scooterType, String username) {
-        Booking booking = new Booking(pickupStation, dropoffStation, scooterType, username);
-        return bookingRepository.save(booking);
-    }
+    @Autowired
+    private UserRepository userRepository;
 
-    public List<Booking> getUserBookings(String username) {
-        return bookingRepository.findByUsername(username);
+    @Autowired
+    private ScooterRepository scooterRepository;
+
+    public Booking createBooking(Station pickup, Station dropoff, ScooterType scooterType, Long userId) {
+        // Find user by ID
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Find a scooter by ID or pick from repository
+        // For now, we just pick the first available one matching scooterType and station
+        List<Scooter> scooters = scooterRepository.findAll();
+        Scooter availableScooter = scooters.stream()
+            .filter(s -> s.getScooterType() == scooterType && s.getStation().getId().equals(pickup.getId()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No available scooter"));
+
+        // Create a new booking
+        Booking booking = new Booking();
+        booking.setUser(user);
+        booking.setScooter(availableScooter);
+        booking.setPickupStation(pickup);
+        booking.setDropoffStation(dropoff);
+        booking.setStartTime(LocalDateTime.now());
+        booking.setEndTime(LocalDateTime.now().plusMinutes(30));
+
+        return bookingRepository.save(booking);
     }
 
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
+    }
+
+    public List<Booking> getUserBookings(String username) {
+        return bookingRepository.findByUserUsername(username);
     }
 }
