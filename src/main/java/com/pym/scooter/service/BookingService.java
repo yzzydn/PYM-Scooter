@@ -20,25 +20,25 @@ public class BookingService {
     @Autowired
     private ScooterRepository scooterRepository;
 
+
     public Booking createBooking(Station pickup, Station dropoff, ScooterType scooterType, Long userId) {
-        // Find user by ID
+        // Find user
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Find a scooter by ID or pick from repository
-        // For now, we just pick the first available one matching scooterType and station
+        // Find available scooter
         List<Scooter> scooters = scooterRepository.findAll();
         Scooter availableScooter = scooters.stream()
-            .filter(s -> s.getScooterType() == scooterType && s.getStation().getId().equals(pickup.getId()))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No available scooter"));
+                .filter(s -> s.getScooterType() == scooterType && s.getStation().getId().equals(pickup.getId()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No available scooter of type " + scooterType));
 
-        // Create a new booking
+        // Create booking
         Booking booking = new Booking();
         booking.setUser(user);
-        booking.setScooter(availableScooter);
         booking.setPickupStation(pickup);
         booking.setDropoffStation(dropoff);
+        booking.setScooter(availableScooter);
         booking.setStartTime(LocalDateTime.now());
         booking.setEndTime(LocalDateTime.now().plusMinutes(30));
 

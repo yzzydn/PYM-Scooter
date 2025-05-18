@@ -3,7 +3,6 @@ package com.pym.scooter.model;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 public class Scooter {
 
@@ -18,7 +17,6 @@ public class Scooter {
     @JoinColumn(name = "station_id")
     @JsonBackReference 
     private Station station;
-
 
     public Scooter() {}
 
@@ -45,5 +43,10 @@ public class Scooter {
 
     public void setStation(Station station) {
         this.station = station;
+    }
+
+    // ✅ Add this for backward compatibility with controller expecting getType()
+    public ScooterType getType() {
+        return this.scooterType;
     }
 }
